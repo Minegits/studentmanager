@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzw.studentmanager.mapper.TeacherMapper">
+   <select id="getAllTeacher" resultType="Teacher">
+       select * from teacher
+   </select>
+    <select id="getTeacher" resultType="Teacher">
+        select * from teacher where
+        <choose>
+            <when test="id != 0 and name == null and password == null">
+                id = #{id}
+            </when>
+            <when test="id == 0 and name != null and password != null">
+                name = #{name} and password = #{password}
+            </when>
+            <otherwise>
+                1 = 1
+            </otherwise>
+        </choose>
+    </select>
+    <insert id="insetTeacher">
+        insert into teacher(name,password) values(#{name},#{password})
+    </insert>
+</mapper>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/css/Login.css">
+</head>
+
+<body>
+<div id="login_box">
+    <h2>LOGIN</h2>
+    <form id="first" th:action="@{/updateStu}" method="post">
+        <div id="form" th:each="stu:${student}">
+            <div id="input_box">
+                <span th:text="${msg}" style="color: red;font-size: 14px;;"></span>
+            </div>
+            <input type="hidden" th:value="${stu.no}" name="no">
+            <div id="input_box">
+                <span style="color: white;">姓名：</span><input type="text" th:value="${stu.username}" name="username">
+            </div>
+            <div id="input_box">
+                 <span style="color: white;">学院：</span><input type="text" name="college" th:value="${stu.college}">
+            </div>
+            <div id="input_box">
+                 <span style="color: white;">专业：</span><input type="text" name="specialty" th:value="${stu.specialty}">
+            </div>
+            <div id="input_box">
+                 <span style="color: white;">年级：</span><input type="text" name="grade" th:value="${stu.grade}">
+            </div>
+            <div id="input_box">
+                 <span style="color: white;">班级：</span><input type="text" name="classes" th:value="${stu.classes}">
+            </div>
+            <div id="input_box">
+                 <span style="color: white;">年龄：</span><input type="text" name="age" th:value="${stu.age}">
+            </div>
+            <div id="input_box">
+                <input type="submit" value="修改">
+            </div>
+
+        </div>
+    </form>
+    <br>
+</div>
+</body>
+
+</html>

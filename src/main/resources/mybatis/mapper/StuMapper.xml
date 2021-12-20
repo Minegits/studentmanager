@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzw.studentmanager.mapper.StuMapper">
+    <select id="getAllStu" resultType="Student">
+        select * from stu
+    </select>
+    <select id="getStu" resultType="Student">
+        select * from stu where
+        <choose>
+            <when test="no != 0 and username == null and password == null">
+                no = #{no}
+            </when>
+            <when test="no == 0 and username != null and password != null">
+                no = #{username} and no = #{password}
+            </when>
+            <otherwise>
+                1 = 1
+            </otherwise>
+        </choose>
+    </select>
+    <insert id="insetStu" parameterType="Student">
+        insert into stu(no,username,college,specialty,grade,classes,age)
+        values(#{no},#{username},#{college},#{specialty},#{grade},#{classes},#{age})
+    </insert>
+
+    <delete id="deleteStu">
+        delete from stu where no = #{no}
+    </delete>
+
+    <update id="updateStu">
+        update stu set username = #{username},college = #{college},specialty=#{specialty},grade=#{grade},classes=#{classes},age=#{age} where no = #{no}
+    </update>
+</mapper>

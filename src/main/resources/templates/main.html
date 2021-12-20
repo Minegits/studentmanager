@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>学生信息管理系统</title>
+    <link rel="stylesheet" type="text/css" href="/css/studentInfomationManage.css">
+</head>
+<body>
+
+<div class="wrapperBox">
+    <div class="header">
+        <div class="headerTitle">
+            <div class="headerLine">学生信息管理系统</div>
+        </div>
+        <div class="headerButton">
+            <a class="addButton" href="insert">新增</a>
+            <a class="user" th:text="${session.teacher.name}"></a>
+            <a class="logout" href="Logout">Logout</a>
+        </div>
+    </div>
+    <div class="container">
+        <table id="containerTable">
+            <thead class="tableHeaher">
+            <tr>
+                <th><input type="checkbox"></th>
+                <th>序号</th>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>学院</th>
+                <th>专业</th>
+                <th>年级</th>
+                <th>班级</th>
+                <th>年龄</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <form id="formbody" action="/deletenos" method="post">
+                <button id="deleteButton">删除</button>
+
+                <tbody id="tdata">
+
+            <tr  th:each="stu,stat:${stuList}">
+                <td><input name="nos" th:value="${stu.no}" type="checkbox"></td>
+                <td  th:text="${stat.count}">1</td>
+                <td  th:text="${stu.no}">11503080210</td>
+                <td  th:text="${stu.username}">张三</td>
+                <td  th:text="${stu.college}">计算机科学与工程学院</td>
+                <td  th:text="${stu.specialty}">软件工程</td>
+                <td  th:text="${stu.grade}">2015</td>
+                <td  th:text="${stu.classes}">2</td>
+                <td  th:text="${stu.age}">21</td>
+                <td>
+                    <a class="viewInf ">查看</a>
+                    <a class="updateInf" th:href="@{/update/{no}(no=${stu.no})}">修改</a>
+                    <a class="updateInf" th:href="@{/delete/{no}(no=${stu.no})}">删除</a>
+                </td>
+            </tr>
+            </tbody>
+            </form>
+            </tbody>
+        </table>
+
+    <div class="footer">
+        <div class="pageInformation">
+            第<span id="curPage"></span>页，
+            共<span id="countPage"></span>条，(每页显示10条)
+            <input id="page" type="text"style="display: none" >
+        </div>
+        <div class="pageButton">
+            <button id="prePageButton">上一页</button>
+            <button id="nextPageButton">下一页</button>
+        </div>
+    </div>
+</div>
+</div>
+<script src="/js/jquery-3.6.0.min.js"></script>
+<script src="/js/studentInfomationManage.js"></script>
+</body>
+</html>
